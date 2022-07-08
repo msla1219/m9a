@@ -40,7 +40,10 @@ def get_ape_info(apeID):
 
     data['owner'] = contract.functions.ownerOf(apeID).call()
     data['image'] = ape['image']
-    data['eyes'] = ape['attributes'][3]['value']
+
+    for i in range(len(ape['attributes'])):
+        if ape['attributes'][i]['trait_type'] == 'Eyes':
+            data['eyes'] = ape['attributes'][i]['value']
 
 
     assert isinstance(data, dict), f'get_ape_info{apeID} should return a dict'
